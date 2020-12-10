@@ -1,0 +1,47 @@
+[
+    {
+        "image": "${image_url}",
+        "name": "grafana",
+        "logConfiguration": {
+            "logDriver": "awslogs",
+            "options": {
+                "awslogs-group": "${log_group_name}",
+                "awslogs-region": "${log_group_region}",
+                "awslogs-stream-prefix": "grafana"
+            }
+        },
+        "essential": true,
+        "portMappings": [
+            {
+                "hostPort": 3000,
+                "containerPort": 3000,
+                "protocol": "tcp"
+            }
+        ],
+        "environment": [
+            { "name" : "GF_SERVER_ROOT_URL",   "value" : "${GF_SERVER_ROOT_URL}" },
+            { "name" : "GF_LOG_LEVEL",         "value" : "${GF_LOG_LEVEL}" },
+            { "name" : "GF_INSTALL_PLUGINS",   "value" : "${GF_INSTALL_PLUGINS}" },
+            { "name" : "GF_DATABASE_USER",     "value" : "${GF_DATABASE_USER}" },
+            { "name" : "GF_DATABASE_TYPE",     "value" : "${GF_DATABASE_TYPE}" },
+            { "name" : "GF_DATABASE_HOST",     "value" : "${GF_DATABASE_HOST}" },
+            { "name" : "GF_SMTP_ENABLED",      "value" : "${GF_SMTP_ENABLED}" },
+            { "name" : "GF_SMTP_HOST",         "value" : "${GF_SMTP_HOST}" },
+            { "name" : "GF_SMTP_USER",         "value" : "${GF_SMTP_USER}" }
+        ],
+        "secrets": [
+            {
+                "name": "GF_DATABASE_PASSWORD",
+                "valueFrom": "${GF_DATABASE_PASSWORD}"
+            },
+            {
+                "name": "GF_SECURITY_ADMIN_PASSWORD",
+                "valueFrom": "${GF_SECURITY_ADMIN_PASSWORD}"
+            },
+            {
+                "name": "GF_SMTP_PASSWORD",
+                "valueFrom": "${GF_SMTP_PASSWORD}"
+            }
+        ]
+    }
+]

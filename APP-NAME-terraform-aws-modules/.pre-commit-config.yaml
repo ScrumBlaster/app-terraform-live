@@ -1,0 +1,9 @@
+repos:
+- repo: git://github.com/antonbabenko/pre-commit-terraform
+  # rev: v1.32.0 # Having trouble with this verison when running terraform_validate hook...
+  rev: v1.25.0 # Get the latest from: https://github.com/antonbabenko/pre-commit-terraform/releases
+  hooks:
+    - id: terraform_fmt
+    - id: terraform_validate
+    - id: terraform_tflint
+    # - id: terraform_docs # Still unsure how we to use this with current repo setup...
